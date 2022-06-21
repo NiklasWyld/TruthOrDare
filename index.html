@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth or Dare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+    <script>
+        function start() {
+            var choice = document.getElementById("tod").value;
+            var span = document.getElementById("span");
+
+            if (choice == "truth") {
+                fetch("https://api.truthordarebot.xyz/v1/truth")
+                    .then(response => response.json())
+                    .then(data => span.textContent=data.translations.de);
+            } else if (choice == "dare") {
+                fetch("https://api.truthordarebot.xyz/v1/dare")
+                    .then(response => response.json())
+                    .then(data => span.textContent=data.translations.de);
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: rgb(28, 17, 71);
+        }
+
+        .box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+        }
+
+        .main {
+            background-color: lightskyblue;
+            border-radius: 20px;
+            width: 300px;
+            height: 300px;
+            padding: 40px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            text-align: center;
+        }
+
+        .label-for-tod {
+            font-weight: bold;
+        }
+
+        .label-for-tod:hover {
+            cursor: text;
+        }
+
+        .tod {
+            width: 290px;
+            height: 40px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        .span {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .submit {
+            margin-top: 40px;
+            border-radius: 10px;
+            width: 120px;
+            height: 40px;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        .submit:hover {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 8px 15px;
+        }
+
+        @media (min-width: 100px) and (max-width: 999px) {
+            .main  {
+                width: 200px;
+            }
+
+            .tod {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="main">
+            <label for="tod" class="label-for-tod">Wahrheit oder Pflicht: </label>
+
+            <select name="tod" id="tod" class="tod">
+                <option value="truth">Wahrheit</option>
+                <option value="dare">Pflicht</option>
+            </select>
+
+            <br>
+
+            <span id="span" class="span">Test</span>
+            
+            <br>
+
+            <button class="submit" onclick="start()">Los gehts!</button>
+        </div>
+    </div>
+</body>
+</html>
